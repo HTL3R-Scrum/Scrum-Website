@@ -2,7 +2,6 @@
 "use strict";
 module.exports = function(grunt) {
 
-    // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
         
@@ -33,6 +32,18 @@ module.exports = function(grunt) {
                 src: ["src/html/*.html"]
             }
         },
+        htmlmin: {
+            options: {
+                removeComments: true,
+                collapseWhitespace: true
+            },
+            files: [{
+                expand: true,
+                cwd: "src/html/",
+                src: ["*.html"],
+                dest: "dist/"
+            }]
+        },
         jasmine: {
             options: {
                 src: ["test/*.js"]
@@ -51,7 +62,7 @@ module.exports = function(grunt) {
         mkdir: {
             tmp: {
                 options: {
-                    create: ["tmp", "tmp/templates"]
+                    create: ["tmp"]
                 }
             },
             dist: {
@@ -59,6 +70,19 @@ module.exports = function(grunt) {
                     create: ["dist"]
                 }
             }
+        },
+        sass: {
+            options: {
+                sourcemap: "none",
+                style: "compressed"
+            },
+            files: [{
+                expand: true,
+                cwd: "src/scss/",
+                src: ["*.scss"],
+                dest: "dist/css/",
+                ext: ".css"
+            }]
         },
         scsslint: {
             options: {
@@ -68,21 +92,33 @@ module.exports = function(grunt) {
             files: {
                 src: ["src/scss/*.scss"]
             }
+        },
+        uglify: {
+            options: {
+                ASCIIOnly: true
+            },
+            files: {
+                "dist/script.js": ["tmp/templates.js", "src/js/*.js"]
+            }
         }
     });
 
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-handlebars");
+    grunt.loadNpmTasks("grunt-contrib-htmlmin");
     grunt.loadNpmTasks("grunt-contrib-jasmine");
     grunt.loadNpmTasks("grunt-contrib-jshint");
+    grunt.loadNpmTasks("grunt-contrib-sass");
+    grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-mkdir");
     grunt.loadNpmTasks("grunt-scss-lint");
     grunt.loadNpmTasks("grunt-w3c-validation");
 
-    grunt.registerTask("default", ["lint", "test"]);
+    grunt.registerTask("default", ["lint", "test", "prepare", "precompile", "compile", "cleanup"]);
     grunt.registerTask("lint", ["jshint", "html-validation", "scsslint"]);
     grunt.registerTask("test", ["jasmine"]);
-    grunt.registerTask("precompile", ["mkdir:tmp", "handlebars"]);
+    grunt.registerTask("prepare", ["mkdir:tmp"]);
+    grunt.registerTask("precompile", ["handlebars"]);
+    grunt.registerTask("compile", ["uglify", "htmlmin", "sass"]);
     grunt.registerTask("cleanup", ["clean:tmp"]);
-
 };
