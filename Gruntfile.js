@@ -15,6 +15,13 @@ module.exports = function(grunt) {
                 src: ["src/html/*.html"]
             }
         },
+        jasmine: {
+            options: {
+                src: ["test/*.js"]
+            },
+            files: {
+            }
+        },
         jshint: {
             options: {
                 jshintrc: ".jshintrc"
