@@ -1,3 +1,4 @@
 node_modules/
+tmp/
 validation-report.json
 validation-status.json

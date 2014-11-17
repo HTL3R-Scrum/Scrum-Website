@@ -6,6 +6,24 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
         
+        clean: {
+            tmp: ["tmp"],
+            dist: ["dist"]
+        },
+        handlebars: {
+            options: {
+                namespace: "JST",
+                processContent: function(content) {
+                    // shorten templates
+                    content = content.replace(/^[\x20\t]+/mg, "").replace(/[\x20\t]+$/mg, "");
+                    content = content.replace(/^[\r\n]+/, "").replace(/[\r\n]*$/, "\n");
+                    return content;
+                }
+            },
+            files: {
+                "tmp/templates.js": ["src/templates/*.hbs"]
+            }
+        },
         "html-validation": {
             options: {
                 charset: "utf-8",
@@ -30,6 +48,18 @@ module.exports = function(grunt) {
                 src: ["Gruntfile.js", "src/js/*.js"]
             }
         },
+        mkdir: {
+            tmp: {
+                options: {
+                    create: ["tmp", "tmp/templates"]
+                }
+            },
+            dist: {
+                options: {
+                    create: ["dist"]
+                }
+            }
+        },
         scsslint: {
             options: {
                 compact: true,
@@ -41,13 +71,18 @@ module.exports = function(grunt) {
         }
     });
 
-    // Load the plugin that provides the "uglify" task.
+    grunt.loadNpmTasks("grunt-contrib-clean");
+    grunt.loadNpmTasks("grunt-contrib-handlebars");
+    grunt.loadNpmTasks("grunt-contrib-jasmine");
     grunt.loadNpmTasks("grunt-contrib-jshint");
+    grunt.loadNpmTasks("grunt-mkdir");
     grunt.loadNpmTasks("grunt-scss-lint");
     grunt.loadNpmTasks("grunt-w3c-validation");
 
-    // Default task(s).
-    grunt.registerTask("default", ["lint"]);
+    grunt.registerTask("default", ["lint", "test"]);
     grunt.registerTask("lint", ["jshint", "html-validation", "scsslint"]);
+    grunt.registerTask("test", ["jasmine"]);
+    grunt.registerTask("precompile", ["mkdir:tmp", "handlebars"]);
+    grunt.registerTask("cleanup", ["clean:tmp"]);
 
 };
