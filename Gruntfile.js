@@ -37,12 +37,14 @@ module.exports = function(grunt) {
                 removeComments: true,
                 collapseWhitespace: true
             },
-            files: [{
-                expand: true,
-                cwd: "src/html/",
-                src: ["*.html"],
-                dest: "dist/"
-            }]
+            all: {
+                files: [{
+                    expand: true,
+                    cwd: "src/html/",
+                    src: ["*.html"],
+                    dest: "dist/"
+                }]
+            }
         },
         jasmine: {
             options: {
@@ -76,13 +78,15 @@ module.exports = function(grunt) {
                 sourcemap: "none",
                 style: "compressed"
             },
-            files: [{
-                expand: true,
-                cwd: "src/scss/",
-                src: ["*.scss"],
-                dest: "dist/css/",
-                ext: ".css"
-            }]
+            all: {
+                files: [{
+                    expand: true,
+                    cwd: "src/scss/",
+                    src: ["*.scss"],
+                    dest: "dist/css/",
+                    ext: ".css"
+                }]
+            }
         },
         scsslint: {
             options: {
