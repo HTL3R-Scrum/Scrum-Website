@@ -1,0 +1,64 @@
+$c-primary: #06b;
+$c-white:   #f3f5fe;
+
+$border-space: 20vw;
+$header-height: 3em;
+
+body {
+    font-family: "Droid Serif", serif;
+}
+
+header {
+    background-color: $c-primary;
+    color: $c-white;
+    font-family: "Droid Sans", sans-serif;
+    font-size: x-large;
+    height: $header-height;
+    line-height: 1em;
+    position: fixed;
+    width: 100%;
+    
+    div, figure, ul {
+        height: 100%;
+    }
+    
+    figure {
+        img {
+            $height: 2.5em;
+            
+            display: inline-block;
+            height: $height;
+            margin-top: ($header-height - $height) / 2;
+        }
+        
+        figcaption {
+            bottom: 1em;
+            display: inline-block;
+            font-size: medium;
+            left: 1em;
+            position: relative;
+        }
+    }
+    
+    ul li {
+        $border-width: 2px;
+        
+        box-sizing: border-box;
+        display: inline-block;
+        flex: auto;
+        height: $header-height;
+        line-height: $header-height;
+        text-align: center;
+        
+        &:hover {
+            box-shadow: inset 0 2px 0 $c-white;
+        }
+
+        a {
+            color: inherit;
+            font-size: large;
+            text-decoration: none;
+            vertical-align: middle;
+        }
+    }
+}

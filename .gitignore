@@ -1,4 +1,5 @@
 node_modules/
 tmp/
+.sass-cache/
 validation-report.json
 validation-status.json
