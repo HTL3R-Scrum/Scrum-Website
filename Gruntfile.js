@@ -104,6 +104,24 @@ module.exports = function(grunt) {
             files: {
                 "dist/script.js": ["tmp/templates.js", "src/js/*.js"]
             }
+        },
+        watch: {
+            scripts: {
+                files: ["src/template/*.hbs", "src/js/*.js"],
+                tasks: ["handlebars", "uglify"]
+            },
+            scss: {
+                files: ["src/scss/*.scss"],
+                tasks: ["sass"]
+            },
+            html: {
+                files: ["src/html/*.html"],
+                tasks: ["htmlmin"]
+            },
+            all: {
+                files: ["src/**/*"],
+                tasks: ["precompile", "compile"]
+            }
         }
     });
 
@@ -114,6 +132,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-sass");
     grunt.loadNpmTasks("grunt-contrib-uglify");
+    grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-mkdir");
     grunt.loadNpmTasks("grunt-scss-lint");
     grunt.loadNpmTasks("grunt-w3c-validation");
