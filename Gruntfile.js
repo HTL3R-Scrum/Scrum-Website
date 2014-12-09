@@ -17,8 +17,8 @@ module.exports = function(grunt) {
             }
         },
         clean: {
-            tmp: ["tmp/**", "tmp"],
-            dist: ["dist/**", "dist"]
+            tmp: ["tmp/**", "tmp/"],
+            dist: ["dist/**", "dist/"]
         },
         cssmin: {
             all: {
@@ -117,7 +117,9 @@ module.exports = function(grunt) {
                 ASCIIOnly: true
             },
             all: {
-                "dist/script.js": ["tmp/templates.js", "src/js/*.js"]
+                files: {
+                    "dist/script.js": ["tmp/templates.js", "src/js/*.js"]
+                }
             }
         },
         watch: {
