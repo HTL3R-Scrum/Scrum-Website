@@ -10,6 +10,10 @@ $footer-height: 2em;
 body {
     background-color: $c-white;
     font-family: "Droid Serif", serif;
+    
+    div {
+        min-height: 100%;
+    }
 }
 
 header {
@@ -24,15 +28,18 @@ header {
     width: 100%;
     z-index: 1;
     
-    div, figure, ul {
+    div,
+    figure,
+    ul {
         height: 100%;
     }
     
-    /* All Mobile Sizes (devices and browser) */
+    // All Mobile Sizes (devices and browser)
     @media only screen and (max-width: 767px) {
         height: 2 * $header-height;
         
-        figure, ul {
+        figure,
+        ul {
             height: 50%;
         }
     }
@@ -70,7 +77,9 @@ header {
             line-height: $header-height;
             text-align: center;
 
-            &:hover, &:focus, &:active {
+            &:hover,
+            &:focus,
+            &:active {
                 box-shadow: inset 0 2px 0 $c-white;
             }
 
@@ -85,6 +94,9 @@ header {
 }
 
 main {
+    overflow: auto;
+    padding-bottom: $footer-height;
+    
     &::before {
         content: '';
         display: block;
@@ -92,7 +104,7 @@ main {
         margin-top: $header-height;
     }
     
-    & > div {
+    > div {
         padding-bottom: 2em;
         
         &:nth-child(even) {
@@ -103,7 +115,9 @@ main {
         section {
             line-height: 140%;
 
-            h1, h2, h3 {
+            h1,
+            h2,
+            h3 {
                 line-height: 2em;
             }
 
@@ -124,31 +138,23 @@ main {
 
 // STICKY FOOTER
 
-html, body {
+html,
+body {
     height: 100%;
-}
-
-body > div {
-    min-height: 100%;
-}
-
-main {
-    overflow: auto;
-	padding-bottom: $footer-height;
 }
 
 footer {
     background-color: $c-blue-deep;
-	height: $footer-height;
-	margin-top: - $footer-height;
+    height: $footer-height;
+    margin-top: - $footer-height;
     position: relative;
 } 
 
-/* Opera Fix */
+// Opera Fix
 body::before {
-	content: '';
-	height: 100%;
-	float: left;
-	width: 0;
-	margin-top: -32767px;
+    content: '';
+    float: left;
+    height: 100%;
+    margin-top: -32767px;
+    width: 0;
 }
