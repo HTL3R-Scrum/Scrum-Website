@@ -4,3 +4,4 @@ tmp/
 validation-report.json
 validation-status.json
 .grunt/
+_SpecRunner.html

@@ -9,23 +9,24 @@ module.exports = function(grunt) {
             options: {
                 cascade: false
             },
-            files: [{
+            all: {
                 expand: true,
                 cwd: "tmp/css/",
-                src: ["*.css"]
-            }]
+                src: ["*.css"],
+                dest: "tmp/css/"
+            }
         },
         clean: {
-            tmp: ["tmp/"],
-            dist: ["dist/"]
+            tmp: ["tmp/**", "tmp"],
+            dist: ["dist/**", "dist"]
         },
         cssmin: {
-            files: [{
+            all: {
                 expand: true,
                 cwd: "tmp/css/",
                 src: ["*.css"],
                 dest: "dist/css/"
-            }]
+            }
         },
         handlebars: {
             options: {
@@ -37,7 +38,7 @@ module.exports = function(grunt) {
                     return content;
                 }
             },
-            files: {
+            all: {
                 "tmp/templates.js": ["src/templates/*.hbs"]
             }
         },
@@ -46,7 +47,7 @@ module.exports = function(grunt) {
                 charset: "utf-8",
                 doctype: "HTML5"
             },
-            files: {
+            all: {
                 src: ["src/html/*.html"]
             }
         },
@@ -67,15 +68,13 @@ module.exports = function(grunt) {
         jasmine: {
             options: {
                 src: ["test/*.js"]
-            },
-            files: {
             }
         },
         jshint: {
             options: {
                 jshintrc: ".jshintrc"
             },
-            files: {
+            all: {
                 src: ["Gruntfile.js", "src/js/*.js"]
             }
         },
@@ -97,13 +96,11 @@ module.exports = function(grunt) {
                 style: "expanded"
             },
             all: {
-                files: [{
-                    expand: true,
-                    cwd: "src/scss/",
-                    src: ["*.scss"],
-                    dest: "tmp/css/",
-                    ext: ".css"
-                }]
+                expand: true,
+                cwd: "src/scss/",
+                src: ["*.scss"],
+                dest: "tmp/css/",
+                ext: ".css"
             }
         },
         scsslint: {
@@ -111,7 +108,7 @@ module.exports = function(grunt) {
                 compact: true,
                 config: "scss.yml"
             },
-            files: {
+            all: {
                 src: ["src/scss/*.scss"]
             }
         },
@@ -119,7 +116,7 @@ module.exports = function(grunt) {
             options: {
                 ASCIIOnly: true
             },
-            files: {
+            all: {
                 "dist/script.js": ["tmp/templates.js", "src/js/*.js"]
             }
         },
