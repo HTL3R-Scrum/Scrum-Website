@@ -17,8 +17,8 @@ module.exports = function(grunt) {
             }
         },
         clean: {
-            tmp: ["tmp/**", "tmp/"],
-            dist: ["dist/**", "dist/"]
+            tmp: ["tmp/**", "tmp"],
+            dist: ["dist/**", "dist"]
         },
         cssmin: {
             all: {
@@ -39,7 +39,9 @@ module.exports = function(grunt) {
                 }
             },
             all: {
-                "tmp/templates.js": ["src/templates/*.hbs"]
+                files: {
+                    "tmp/templates.js": ["src/templates/*.hbs"]
+                }
             }
         },
         "html-validation": {
@@ -66,7 +68,7 @@ module.exports = function(grunt) {
             }
         },
         jasmine: {
-            options: {
+            all: {
                 src: ["test/*.js"]
             }
         },
