@@ -5,9 +5,27 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
         
+        autoprefixer: {
+            options: {
+                cascade: false
+            },
+            files: [{
+                expand: true,
+                cwd: "tmp/css/",
+                src: ["*.css"]
+            }]
+        },
         clean: {
-            tmp: ["tmp"],
-            dist: ["dist"]
+            tmp: ["tmp/"],
+            dist: ["dist/"]
+        },
+        cssmin: {
+            files: [{
+                expand: true,
+                cwd: "tmp/css/",
+                src: ["*.css"],
+                dest: "dist/css/"
+            }]
         },
         handlebars: {
             options: {
@@ -64,7 +82,7 @@ module.exports = function(grunt) {
         mkdir: {
             tmp: {
                 options: {
-                    create: ["tmp"]
+                    create: ["tmp", "tmp/css"]
                 }
             },
             dist: {
@@ -76,14 +94,14 @@ module.exports = function(grunt) {
         sass: {
             options: {
                 sourcemap: "none",
-                style: "compressed"
+                style: "expanded"
             },
             all: {
                 files: [{
                     expand: true,
                     cwd: "src/scss/",
                     src: ["*.scss"],
-                    dest: "dist/css/",
+                    dest: "tmp/css/",
                     ext: ".css"
                 }]
             }
@@ -125,7 +143,9 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.loadNpmTasks("grunt-autoprefixer");
     grunt.loadNpmTasks("grunt-contrib-clean");
+    grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-contrib-handlebars");
     grunt.loadNpmTasks("grunt-contrib-htmlmin");
     grunt.loadNpmTasks("grunt-contrib-jasmine");
@@ -141,7 +161,7 @@ module.exports = function(grunt) {
     grunt.registerTask("lint", ["jshint", "html-validation", "scsslint"]);
     grunt.registerTask("test", ["jasmine"]);
     grunt.registerTask("prepare", ["mkdir:tmp"]);
-    grunt.registerTask("precompile", ["handlebars"]);
-    grunt.registerTask("compile", ["uglify", "htmlmin", "sass"]);
+    grunt.registerTask("precompile", ["handlebars", "sass", "autoprefixer"]);
+    grunt.registerTask("compile", ["uglify", "htmlmin", "cssmin"]);
     grunt.registerTask("cleanup", ["clean:tmp"]);
 };
