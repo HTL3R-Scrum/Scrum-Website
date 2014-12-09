@@ -1,11 +1,23 @@
 $c-blue: #06b;
 $c-blue-deep: #042ef1;
+$c-purple-deep: #5103f1;
 $c-white: #f4f6fe;
 
 $border-space: 20vw;
 $header-height: 3em;
 $header-font-size: x-large;
 $footer-height: 2em;
+
+@media only screen and (min-width: 768px) {
+    .mobile {
+        display: none !important;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .desktop {
+        display: none !important;
+    }
+}
 
 body {
     background-color: $c-white;
@@ -32,16 +44,6 @@ header {
     figure,
     ul {
         height: 100%;
-    }
-    
-    // All Mobile Sizes (devices and browser)
-    @media only screen and (max-width: 767px) {
-        height: 2 * $header-height;
-        
-        figure,
-        ul {
-            height: 50%;
-        }
     }
     
     figure {
@@ -89,6 +91,14 @@ header {
                 text-decoration: none;
                 vertical-align: middle;
             }
+        }
+    }
+    
+    ul.mobile {
+        display: flex;
+        
+        li {
+            flex: auto;
         }
     }
 }
@@ -144,10 +154,15 @@ body {
 }
 
 footer {
-    background-color: $c-blue-deep;
+    background-color: $c-blue;
+    border-top: solid 2px $c-blue-deep;
     height: $footer-height;
     margin-top: - $footer-height;
     position: relative;
+    
+    div {
+        line-height: $footer-height;
+    }
 } 
 
 // Opera Fix
