@@ -102,6 +102,8 @@ header {
     }
 }
 
+
+
 main {
     overflow: auto;
     padding-bottom: $footer-height;
@@ -140,6 +142,10 @@ main {
 
             h3 {
                 font-size: large;
+            }
+            
+            &.templates {
+                @import 'templates';
             }
         }
     }

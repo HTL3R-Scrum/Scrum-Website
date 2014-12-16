@@ -1,15 +1,36 @@
 document.addEventListener("DOMContentLoaded", function () {
     "use strict";
     var main = document.querySelector("main"),
-        content = JST["src/templates/overview.hbs"]({
-            paragraphs: [
+        content = JST["src/templates/templates.hbs"]({
+            groups: [
                 {
-                    "title": "Titel",
-                    "text": "Lorem ipsum"
-                },
-                {
-                    "title": "Titel 2",
-                    "text": "Lorem lorem"
+                    "title": "Sprint",
+                    "files": [
+                        {
+                            "title": "Sprint",
+                            "files": {
+                                "pdf": "",
+                                "word": "",
+                                "od": ""
+                            }
+                        },
+                        {
+                            "title": "Sprint Backlog",
+                            "files": {
+                                "pdf": "",
+                                "word": "",
+                                "od": ""
+                            }
+                        },
+                        {
+                            "title": "Product Backlog",
+                            "files": {
+                                "pdf": "",
+                                "word":  "",
+                                "od": ""
+                            }
+                        }
+                    ]
                 }
             ]
         });

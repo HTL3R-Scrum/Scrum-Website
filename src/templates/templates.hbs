@@ -1,13 +1,15 @@
-{{#each groups}}
-<h1></h1>
-{{#each files}}
 <div>
-    <h2></h2>
-    <div>
-        <div class="box icon-file-pdf"></div>
-        <div class="box icon-file-word"></div>
-        <div class="box icon-file-openoffice"></div>
-    </div>
+    <section class="container templates">
+        {{#each groups}}
+        <h1 class="sixteen columns">{{title}}</h1>
+        {{#each files}}
+        <div class="four columns offset-by-one">
+            <h2>{{title}}</h2>
+            <a class="icon-file-pdf" href="{{file.pdf}}"></a>
+            <a class="icon-file-word" href="{{file.word}}"></a>
+            <a class="icon-file-openoffice" href="{{file.od}}"></a>
+        </div>
+        {{/each}}
+        {{/each}}
+    </section>
 </div>
-{{/each}}
-{{/each}}
