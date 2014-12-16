@@ -159,6 +159,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-w3c-validation");
 
     grunt.registerTask("default", ["lint", "test", "prepare", "precompile", "compile", "cleanup"]);
+    grunt.registerTask("noclean", ["lint", "test", "prepare", "precompile", "compile"]);
     grunt.registerTask("lint", ["jshint", "html-validation", "scsslint"]);
     grunt.registerTask("test", ["jasmine"]);
     grunt.registerTask("prepare", ["mkdir:tmp"]);
