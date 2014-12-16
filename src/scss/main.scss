@@ -69,12 +69,19 @@ header {
     ul {
         display: inline-block;
         
+        .mobile {
+            display: flex;
+            
+            li {
+                flex: auto;
+            }
+        }
+        
         li {
             $border-width: 2px;
 
             box-sizing: border-box;
             display: inline-block;
-            flex: auto;
             height: $header-height;
             line-height: $header-height;
             text-align: center;
@@ -91,14 +98,6 @@ header {
                 text-decoration: none;
                 vertical-align: middle;
             }
-        }
-    }
-    
-    ul.mobile {
-        display: flex;
-        
-        li {
-            flex: auto;
         }
     }
 }
