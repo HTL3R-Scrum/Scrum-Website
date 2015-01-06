@@ -2,14 +2,16 @@
     <section class="container templates">
         {{#each groups}}
         <h1 class="sixteen columns">{{title}}</h1>
-        {{#each files}}
-        <div class="four columns offset-by-one">
-            <h2>{{title}}</h2>
-            <a class="icon-file-pdf" href="{{file.pdf}}"></a>
-            <a class="icon-file-word" href="{{file.word}}"></a>
-            <a class="icon-file-openoffice" href="{{file.od}}"></a>
+        <div class="offset-by-one">
+            {{#each files}}
+            <div class="four columns">
+                <h2>{{title}}</h2>
+                <a class="icon-file-pdf" href="{{file.pdf}}"></a>
+                <a class="icon-file-word" href="{{file.word}}"></a>
+                <a class="icon-file-openoffice" href="{{file.od}}"></a>
+            </div>
+            {{/each}}
         </div>
-        {{/each}}
         {{/each}}
     </section>
 </div>

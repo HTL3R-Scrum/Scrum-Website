@@ -1,7 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
     "use strict";
     var main = document.querySelector("main"),
-        content = JST["src/templates/templates.hbs"]({
+        header = document.querySelector("header");
+    
+    header.addEventListener("click", function (e) {
+        var button = e.target, // menu buttons
+            template,
+            context;
+        if (button.nodeName !== "LI") {
+            return;
+        }
+        
+        template = "src/templates/" + button.dataset.page + ".hbs";
+        context = {
             groups: [
                 {
                     "title": "Sprint",
@@ -33,8 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     ]
                 }
             ]
-        });
-    
-    
-    main.innerHTML = content;
+        };
+        
+        main.innerHTML = JST[template](context);
+    });
 });
