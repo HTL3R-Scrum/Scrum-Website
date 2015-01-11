@@ -149,6 +149,21 @@ main {
             }
         }
     }
+    
+    // general
+    br {
+        display: block;
+        margin-top: 1.5em;
+    }
+    
+    ul {
+        list-style: circle;
+        padding-left: 2em;
+    }
+    
+    blockquote {
+        padding-left: 2em;
+    }
 }
 
 // STICKY FOOTER

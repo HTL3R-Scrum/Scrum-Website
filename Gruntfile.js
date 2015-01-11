@@ -116,7 +116,10 @@ module.exports = function(grunt) {
         },
         uglify: {
             options: {
-                ASCIIOnly: true
+                ASCIIOnly: true,
+                mangle: {
+                    except: ["handleContent"]
+                }
             },
             all: {
                 files: {

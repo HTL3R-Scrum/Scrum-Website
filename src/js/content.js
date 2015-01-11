@@ -1,51 +1,32 @@
+/*global handleContent:true*/
+handleContent = function (response) {
+    "use strict";
+    var name = response.data.name,
+        template = "src/templates/" + name.substring(0, name.length - 4) + "hbs",
+        /*global escape*/
+        context = JSON.parse(decodeURIComponent(escape(window.atob(response.data.content))));
+        /*global -escape*/
+    
+    document.querySelector("main").innerHTML = JST[template](context);
+};
+
 document.addEventListener("DOMContentLoaded", function () {
     "use strict";
-    var main = document.querySelector("main"),
+    var head = document.querySelector("head"),
         header = document.querySelector("header");
     
     header.addEventListener("click", function (e) {
         var button = e.target, // menu buttons
-            template,
-            context;
+            script;
         if (button.nodeName !== "LI") {
             return;
         }
         
-        template = "src/templates/" + button.dataset.page + ".hbs";
-        context = {
-            groups: [
-                {
-                    "title": "Sprint",
-                    "files": [
-                        {
-                            "title": "Sprint",
-                            "files": {
-                                "pdf": "",
-                                "word": "",
-                                "od": ""
-                            }
-                        },
-                        {
-                            "title": "Sprint Backlog",
-                            "files": {
-                                "pdf": "",
-                                "word": "",
-                                "od": ""
-                            }
-                        },
-                        {
-                            "title": "Product Backlog",
-                            "files": {
-                                "pdf": "",
-                                "word":  "",
-                                "od": ""
-                            }
-                        }
-                    ]
-                }
-            ]
-        };
-        
-        main.innerHTML = JST[template](context);
+        script = document.createElement("script");
+        script.setAttribute("src", "https://api.github.com/repos/HTL3R-Scrum/Scrum-Texte/contents/" +
+                         button.dataset.page + ".json?callback=handleContent");
+        head.appendChild(script);
     });
+    
+    header.getElementsByTagName("li")[0].dispatchEvent(new Event("click"));
 });
