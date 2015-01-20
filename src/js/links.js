@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ul = document.createElement("ul"),
         observer;
     
+    nav.innerHTML = "<h1>Gehe zu</h1>";
     nav.appendChild(ul);
     document.querySelector("body").appendChild(nav);
     
