@@ -33,5 +33,9 @@ div > div {
             color: #aaa;
             cursor: pointer;
         }
+        
+        &[href="#"] {
+            color: #999;
+        }
     }
 }
